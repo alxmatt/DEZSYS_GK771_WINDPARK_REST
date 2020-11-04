@@ -17,21 +17,19 @@ public class WindengineController {
     @RequestMapping("/")
     public String windengineMain() {
     	String mainPage = "This is the windengine application! (DEZSYS_GK72_WINDPARK) <br/><br/>" +
-                          "<a href='http://localhost:8080/windengine/001/data'>Link to windengine/001/data</a><br/>" +
-                          "<a href='http://localhost:8080/windengine/001/transfer'>Link to windengine/001/transfer</a><br/>";
+                          "<a href='http://localhost:8080/windengine/001/xml'>Link to windengine/001/xml</a><br/>" +
+                          "<a href='http://localhost:8080/windengine/001/json'>Link to windengine/001/json</a><br/>";
         return mainPage;
     }
     
-    @RequestMapping("/windengine/{windengineID}/data")
-    public WindengineData windengineData( @PathVariable String windengineID ) {
+    @RequestMapping(value="/windengine/{windengineID}/xml",produces = {"application/xml"})
+    public WindengineData windengineDataXML( @PathVariable String windengineID ) {
         return service.getWindengineData( windengineID );
     }
 
-    @RequestMapping("/windengine/{windengineID}/transfer")
-    public String windengineTransfer( @PathVariable String windengineID ) {
-        return service.getGreetings("Windengine.Transfer!");
+    @RequestMapping(value="/windengine/{windengineID}/json",produces = {"application/json"})
+    public WindengineData windengineDataJSON( @PathVariable String windengineID ) {
+        return service.getWindengineData(windengineID);
     }
 
-
-    
 }
